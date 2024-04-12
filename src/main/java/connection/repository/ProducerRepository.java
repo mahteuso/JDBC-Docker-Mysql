@@ -24,26 +24,26 @@ public class ProducerRepository {
     }
 
     public static void delete(Producer producer){
-            String sql = "DELETE FROM `anime_store`.`producer` WHERE (`name` = '%s');".formatted(producer.getName());
+            String sql = "DELETE FROM `anime_store`.`producer` WHERE (`id` = '%s');".formatted(producer.getId());
         try(Connection conn = ConnectionFactory.getConnection();
             Statement stmt = conn.createStatement()){
             int rowsAffected = stmt.executeUpdate(sql);
-            log.info("Deleted producer '{}' from the database rows affected: '{}' ", producer.getName(), rowsAffected);
+            log.info("Deleted producer '{}' from the database rows affected: '{}' ", producer.getId(), rowsAffected);
 
         } catch (SQLException e) {
-            log.error("Error while trying to delete producer '{}'", producer.getName(), e);
+            log.error("Error while trying to delete producer '{}'", producer.getId(), e);
         }
     }
 
     public static void update(Producer producer2, Producer producer){
-        String sql = "UPDATE `anime_store`.`producer` SET `name` = '%s' WHERE (`name` = '%s');".formatted(producer2.getName(), producer.getName());
+        String sql = "UPDATE `anime_store`.`producer` SET `name` = '%s' WHERE (`id` = '%s');".formatted(producer2.getName(), producer.getId());
         try(Connection conn = ConnectionFactory.getConnection();
             Statement stmt = conn.createStatement()){
             int rowsAffected = stmt.executeUpdate(sql);
-            log.info("Updated producer '{}' to '{}' from the database rows affected: '{}' ", producer.getName(), producer2.getName(), rowsAffected);
+            log.info("Updated producer '{}' to '{}' from the database rows affected: '{}' ", producer.getId(), producer2.getName(), rowsAffected);
 
         } catch (SQLException e) {
-            log.error("Error while trying to update producer '{}'", producer.getName(), e);
+            log.error("Error while trying to update producer '{}'", producer.getId(), e);
         }
     }
 }
